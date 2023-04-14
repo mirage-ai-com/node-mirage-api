@@ -34,5 +34,9 @@ client.Task.TranscribeSpeech({
     )
   }
 })
-  .then(console.info)
-  .catch(console.error);
+  .then(function(data) {
+    console.info("Transcribed audio:", data);
+  })
+  .catch(function(error) {
+    console.error("Failed transcribing audio:", error);
+  });
