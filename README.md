@@ -86,3 +86,13 @@ client.Task.AnswerQuestion({
   // (Data here)
 });
 ```
+
+#### Summarize Conversation
+
+* **Method:** `client.Task.SummarizeConversation(data)`
+
+```javascript
+client.Task.SummarizeConversation({
+  // (Data here)
+});
+```
