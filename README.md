@@ -96,3 +96,13 @@ client.Task.SummarizeConversation({
   // (Data here)
 });
 ```
+
+#### Categorize Conversation
+
+* **Method:** `client.Task.CategorizeConversation(data)`
+
+```javascript
+client.Task.CategorizeConversation({
+  // (Data here)
+});
+```
