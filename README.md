@@ -97,7 +97,7 @@ client.Task.TranscribeSpeech({
     "locale": "en",
 
     "parts": [
-      // (...)
+      /* (...) */
 
       {
         "start": 5.0,
@@ -105,7 +105,7 @@ client.Task.TranscribeSpeech({
         "text": " I'm just speaking some seconds to see if the translation is correct"
       },
 
-      // (...)
+      /* (...) */
     ]
   }
 }
