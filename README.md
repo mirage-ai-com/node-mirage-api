@@ -71,6 +71,8 @@ This library implements all methods the Mirage API provides.
 
 * **Method:** `client.Task.TranscribeSpeech(data)`
 
+* **Request:**
+
 ```javascript
 client.Task.TranscribeSpeech({
   "locale": {
@@ -85,9 +87,35 @@ client.Task.TranscribeSpeech({
 });
 ```
 
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "locale": "en",
+
+    "parts": [
+      // (...)
+
+      {
+        "start": 5.0,
+        "end": 9.0,
+        "text": " I'm just speaking some seconds to see if the translation is correct"
+      },
+
+      // (...)
+    ]
+  }
+}
+```
+
 #### Answer Question
 
 * **Method:** `client.Task.AnswerQuestion(data)`
+
+* **Request:**
 
 ```javascript
 client.Task.AnswerQuestion({
@@ -120,9 +148,23 @@ client.Task.AnswerQuestion({
 });
 ```
 
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "answer": "You can add the Crisp chatbox to your website by following this guide: https://help.crisp.chat/en/article/how-to-add-crisp-chatbox-to-your-website-dkrg1d/ :)"
+  }
+}
+```
+
 #### Summarize Conversation
 
 * **Method:** `client.Task.SummarizeConversation(data)`
+
+* **Request:**
 
 ```javascript
 client.Task.SummarizeConversation({
@@ -140,9 +182,23 @@ client.Task.SummarizeConversation({
 });
 ```
 
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "summary": "Valerian wants to set up a week-end auto-responder on Crisp chatbot. Baptiste can give him an example."
+  }
+}
+```
+
 #### Categorize Conversation
 
 * **Method:** `client.Task.CategorizeConversation(data)`
+
+* **Request:**
 
 ```javascript
 client.Task.CategorizeConversation({
@@ -160,9 +216,23 @@ client.Task.CategorizeConversation({
 });
 ```
 
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "category": "Chatbot Configuration Issue"
+  }
+}
+```
+
 #### Translate Text
 
 * **Method:** `client.Task.TranslateText(data)`
+
+* **Request:**
 
 ```javascript
 client.Task.TranslateText({
@@ -173,4 +243,16 @@ client.Task.TranslateText({
 
   "text": "Bonjour, comment puis-je vous aider ?"
 });
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "translation": "Hi, how can I help you?"
+  }
+}
 ```
