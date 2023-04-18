@@ -73,7 +73,15 @@ This library implements all methods the Mirage API provides.
 
 ```javascript
 client.Task.TranscribeSpeech({
-  // (Data here)
+  "locale": {
+    "from": "en",
+    "to": "en"
+  },
+
+  "media": {
+    "type": "audio/mp3",
+    "url": "https://storage.crisp.chat/users/upload/session/5acfdb5400c15c00/audio1681224631050_9elgef.mp3"
+  }
 });
 ```
 
@@ -83,7 +91,32 @@ client.Task.TranscribeSpeech({
 
 ```javascript
 client.Task.AnswerQuestion({
-  // (Data here)
+  "question": "How can I setup the Crisp chatbox?",
+
+  "context": {
+    "team": "Crisp",
+
+    "transcripts": [
+      {
+        "messages": [
+          {
+            "from": "customer",
+            "text": "Hi, does the \"per website\" pricing include sub-domains?"
+          },
+
+          {
+            "from": "agent",
+            "text": "Hi, yes, it includes sub-domains"
+          },
+
+          {
+            "from": "customer",
+            "text": "Perfect thanks!"
+          }
+        ]
+      }
+    ]
+  }
 });
 ```
 
@@ -93,7 +126,17 @@ client.Task.AnswerQuestion({
 
 ```javascript
 client.Task.SummarizeConversation({
-  // (Data here)
+  "transcript": [
+    {
+      "name": "Valerian",
+      "text": "Hello! I have a question about the Crisp chatbot, I am trying to setup a week-end auto-responder, how can I do that?"
+    },
+
+    {
+      "name": "Baptiste",
+      "text": "Hi. Baptiste here. I can provide you an example bot scenario that does just that if you'd like?"
+    }
+  ]
 });
 ```
 
@@ -103,6 +146,31 @@ client.Task.SummarizeConversation({
 
 ```javascript
 client.Task.CategorizeConversation({
-  // (Data here)
+  "transcript": [
+    {
+      "from": "customer",
+      "text": "Hello! I have a question about the Crisp chatbot, I am trying to setup a week-end auto-responder, how can I do that?"
+    },
+
+    {
+      "from": "agent",
+      "text": "Hi. Baptiste here. I can provide you an example bot scenario that does just that if you'd like?"
+    }
+  ]
+});
+```
+
+#### Translate Text
+
+* **Method:** `client.Task.TranslateText(data)`
+
+```javascript
+client.Task.TranslateText({
+  "locale": {
+    "from": "fr",
+    "to": "en"
+  },
+
+  "text": "Bonjour, comment puis-je vous aider ?"
 });
 ```
