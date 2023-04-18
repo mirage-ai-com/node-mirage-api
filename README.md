@@ -67,7 +67,7 @@ This library implements all methods the Mirage API provides.
 
 ### Task API
 
-#### Transcribe Speech
+#### ➡️ Transcribe Speech
 
 * **Method:** `client.Task.TranscribeSpeech(data)`
 
@@ -107,7 +107,7 @@ client.Task.TranscribeSpeech({
 }
 ```
 
-#### Answer Question
+#### ➡️ Answer Question
 
 * **Method:** `client.Task.AnswerQuestion(data)`
 
@@ -156,7 +156,7 @@ client.Task.AnswerQuestion({
 }
 ```
 
-#### Summarize Conversation
+#### ➡️ Summarize Conversation
 
 * **Method:** `client.Task.SummarizeConversation(data)`
 
@@ -190,7 +190,7 @@ client.Task.SummarizeConversation({
 }
 ```
 
-#### Categorize Conversation
+#### ➡️ Categorize Conversation
 
 * **Method:** `client.Task.CategorizeConversation(data)`
 
@@ -224,7 +224,7 @@ client.Task.CategorizeConversation({
 }
 ```
 
-#### Translate Text
+#### ➡️ Translate Text
 
 * **Method:** `client.Task.TranslateText(data)`
 
