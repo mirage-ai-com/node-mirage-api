@@ -252,3 +252,35 @@ client.Task.TranslateText({
   }
 }
 ```
+
+### Data API
+
+#### ➡️ Context Ingest
+
+* **Method:** `client.Data.ContextIngest(data)`
+
+* **Request:**
+
+```javascript
+client.Data.ContextIngest({
+  "items": [
+    {
+      "primary_id": "pri_cf44dd72-4ba9-4754-8fb3-83c4261243c4",
+      "secondary_id": "sec_6693a4a2-e33f-4cce-ba90-b7b5b0922c46",
+      "text": "Text to index here..."
+    }
+  ]
+});
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "imported": true
+  }
+}
+```
