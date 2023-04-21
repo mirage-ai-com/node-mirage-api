@@ -118,7 +118,10 @@ client.Task.AnswerQuestion({
   "question": "How can I setup the Crisp chatbox?",
 
   "context": {
-    "team": "Crisp",
+    "team": {
+      "id": "cf4ccdb5-df44-4668-a9e7-3ab31bebf89b",
+      "name": "Crisp"
+    },
 
     "transcripts": [
       {
@@ -267,7 +270,16 @@ client.Data.ContextIngest({
     {
       "primary_id": "pri_cf44dd72-4ba9-4754-8fb3-83c4261243c4",
       "secondary_id": "sec_6693a4a2-e33f-4cce-ba90-b7b5b0922c46",
-      "text": "Text to index here..."
+      "tertiary_id": "ter_de2bd6e7-74e1-440d-9a23-01964cd4b7da",
+
+      "text": "Text to index here...",
+      "source": "chat",
+      "timestamp": 1682002198552,
+
+      "metadata": {
+        "custom_key": "custom_value",
+        "another_key": "another_value"
+      }
     }
   ]
 });
