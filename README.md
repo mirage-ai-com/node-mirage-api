@@ -115,7 +115,11 @@ client.Task.TranscribeSpeech({
 
 ```javascript
 client.Task.AnswerQuestion({
-  "question": "How can I setup the Crisp chatbox?",
+  "question": "Should I pay more for that?",
+
+  "answer": {
+    "start": "Sure,"
+  },
 
   "context": {
     "team": {
@@ -123,26 +127,47 @@ client.Task.AnswerQuestion({
       "name": "Crisp"
     },
 
-    "transcripts": [
-      {
+    "transcripts": {
+      "conversation": {
         "messages": [
           {
             "from": "customer",
-            "text": "Hi, does the \"per website\" pricing include sub-domains?"
+            "text": "Hey there!"
           },
 
           {
             "from": "agent",
-            "text": "Hi, yes, it includes sub-domains"
+            "text": "Hi. How can I help?"
           },
 
           {
             "from": "customer",
-            "text": "Perfect thanks!"
+            "text": "I want to add more sub-domains to my website."
           }
         ]
-      }
-    ]
+      },
+
+      "related": [
+        {
+          "messages": [
+            {
+              "from": "customer",
+              "text": "Hi, does the \"per website\" pricing include sub-domains?"
+            },
+
+            {
+              "from": "agent",
+              "text": "Hi, yes, it includes sub-domains"
+            },
+
+            {
+              "from": "customer",
+              "text": "Perfect thanks!"
+            }
+          ]
+        }
+      ]
+    }
   }
 });
 ```
