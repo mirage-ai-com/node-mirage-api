@@ -265,7 +265,8 @@ client.Task.TranslateText({
     "to": "en"
   },
 
-  "text": "Bonjour, comment puis-je vous aider ?"
+  "type": "html",
+  "text": "Bonjour, comment puis-je vous aider <span translate=\"no\">Mr Saliou</span> ?"
 });
 ```
 
