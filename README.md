@@ -109,70 +109,76 @@ client.Task.TranscribeSpeech({
 
 #### ➡️ Answer Question
 
-* **Method:** `client.Task.AnswerQuestion(data)`
+* **Method:** `client.Task.AnswerQuestion(data, { stream })`
 
 * **Request:**
 
 ```javascript
-client.Task.AnswerQuestion({
-  "question": "Should I pay more for that?",
+client.Task.AnswerQuestion(
+  {
+    "question": "Should I pay more for that?",
 
-  "answer": {
-    "start": "Sure,"
-  },
-
-  "context": {
-    "team": {
-      "id": "cf4ccdb5-df44-4668-a9e7-3ab31bebf89b",
-      "name": "Crisp"
+    "answer": {
+      "start": "Sure,"
     },
 
-    "transcripts": {
-      "conversation": {
-        "messages": [
-          {
-            "from": "customer",
-            "text": "Hey there!"
-          },
-
-          {
-            "from": "agent",
-            "text": "Hi. How can I help?"
-          },
-
-          {
-            "from": "customer",
-            "text": "I want to add more sub-domains to my website."
-          }
-        ]
+    "context": {
+      "team": {
+        "id": "cf4ccdb5-df44-4668-a9e7-3ab31bebf89b",
+        "name": "Crisp"
       },
 
-      "related": [
-        {
+      "transcripts": {
+        "conversation": {
           "messages": [
             {
               "from": "customer",
-              "text": "Hi, does the \"per website\" pricing include sub-domains?"
+              "text": "Hey there!"
             },
 
             {
               "from": "agent",
-              "text": "Hi, yes, it includes sub-domains"
+              "text": "Hi. How can I help?"
             },
 
             {
               "from": "customer",
-              "text": "Perfect thanks!"
+              "text": "I want to add more sub-domains to my website."
             }
           ]
-        }
-      ]
+        },
+
+        "related": [
+          {
+            "messages": [
+              {
+                "from": "customer",
+                "text": "Hi, does the \"per website\" pricing include sub-domains?"
+              },
+
+              {
+                "from": "agent",
+                "text": "Hi, yes, it includes sub-domains"
+              },
+
+              {
+                "from": "customer",
+                "text": "Perfect thanks!"
+              }
+            ]
+          }
+        ]
+      }
     }
+  },
+
+  {
+    stream : false
   }
-});
+);
 ```
 
-* **Response:**
+* **Response (data):**
 
 ```json
 {
@@ -182,6 +188,16 @@ client.Task.AnswerQuestion({
     "answer": "You can add the Crisp chatbox to your website by following this guide: https://help.crisp.chat/en/article/how-to-add-crisp-chatbox-to-your-website-dkrg1d/ :)"
   }
 }
+```
+
+* **Response (stream):**
+
+```
+{"index": 0, "chunk": "You can add the Crisp chatbox to"}
+{"index": 1, "chunk": " your website by following this guide:"}
+{"index": 2, "chunk": " https://help.crisp.chat/en/article/how-to-add-crisp-chatbox-to-your-website-dkrg1d/"}
+{"index": 3, "chunk": " :)"}
+{"index": 4, "chunk": ""}
 ```
 
 #### ➡️ Summarize Conversation
