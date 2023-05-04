@@ -69,25 +69,31 @@ This library implements all methods the Mirage API provides.
 
 #### ➡️ Transcribe Speech
 
-* **Method:** `client.Task.TranscribeSpeech(data)`
+* **Method:** `client.Task.TranscribeSpeech(data, { stream })`
 
 * **Request:**
 
 ```javascript
-client.Task.TranscribeSpeech({
-  "locale": {
-    "from": "en",
-    "to": "en"
+client.Task.TranscribeSpeech(
+  {
+    "locale": {
+      "from": "en",
+      "to": "en"
+    },
+
+    "media": {
+      "type": "audio/mp3",
+      "url": "https://storage.crisp.chat/users/upload/session/5acfdb5400c15c00/audio1681224631050_9elgef.mp3"
+    }
   },
 
-  "media": {
-    "type": "audio/mp3",
-    "url": "https://storage.crisp.chat/users/upload/session/5acfdb5400c15c00/audio1681224631050_9elgef.mp3"
+  {
+    stream : false
   }
-});
+);
 ```
 
-* **Response:**
+* **Response (data):**
 
 ```json
 {
@@ -105,6 +111,12 @@ client.Task.TranscribeSpeech({
     ]
   }
 }
+```
+
+* **Response (stream):**
+
+```
+{"start": 5.0, "end": 9.0, "text": " I'm just speaking some seconds to see if the translation is correct"}
 ```
 
 #### ➡️ Answer Question
