@@ -21,8 +21,7 @@ var client = new Mirage(
 
 client.Task.TranscribeSpeech({
   locale : {
-    from : "en",
-    to   : "en"
+    to : "en"
   },
 
   media : {

@@ -33,8 +33,7 @@ Then, consume the client eg. to transcribe a audio file containing speech to tex
 ```javascript
 client.Task.TranscribeSpeech({
   locale : {
-    from : "en",
-    to   : "en"
+    to : "en"
   },
 
   media : {
@@ -77,7 +76,6 @@ This library implements all methods the Mirage API provides.
 client.Task.TranscribeSpeech(
   {
     "locale": {
-      "from": "en",
       "to": "en"
     },
 
