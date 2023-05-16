@@ -6,6 +6,7 @@ The Mirage API NodeJS wrapper. Access AI inference services.
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
+* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 14/05/2023
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -62,13 +63,14 @@ var client = new Mirage("user_id", "secret_key");
 
 ## Resource Methods
 
-This library implements all methods the Mirage API provides.
+This library implements all methods the Mirage API provides. See the [API docs](https://docs.mirage-ai.com/references/api/v1/) for a reference of available methods, as well as how returned data is formatted.
 
 ### Task API
 
 #### ➡️ Transcribe Speech
 
 * **Method:** `client.Task.TranscribeSpeech(data, { stream })`
+* **Reference:** [Transcribe Speech](https://docs.mirage-ai.com/references/api/v1/#transcribe-speech)
 
 * **Request:**
 
@@ -120,6 +122,7 @@ client.Task.TranscribeSpeech(
 #### ➡️ Answer Question
 
 * **Method:** `client.Task.AnswerQuestion(data, { stream })`
+* **Reference:** [Answer Question](https://docs.mirage-ai.com/references/api/v1/#answer-question)
 
 * **Request:**
 
@@ -213,6 +216,7 @@ client.Task.AnswerQuestion(
 #### ➡️ Summarize Conversation
 
 * **Method:** `client.Task.SummarizeConversation(data)`
+* **Reference:** [Summarize Conversation](https://docs.mirage-ai.com/references/api/v1/#summarize-conversation)
 
 * **Request:**
 
@@ -247,6 +251,7 @@ client.Task.SummarizeConversation({
 #### ➡️ Categorize Conversation
 
 * **Method:** `client.Task.CategorizeConversation(data)`
+* **Reference:** [Categorize Conversation](https://docs.mirage-ai.com/references/api/v1/#categorize-conversation)
 
 * **Request:**
 
@@ -281,6 +286,7 @@ client.Task.CategorizeConversation({
 #### ➡️ Translate Text
 
 * **Method:** `client.Task.TranslateText(data)`
+* **Reference:** [Translate Text](https://docs.mirage-ai.com/references/api/v1/#translate-text)
 
 * **Request:**
 
@@ -313,6 +319,7 @@ client.Task.TranslateText({
 #### ➡️ Context Ingest
 
 * **Method:** `client.Data.ContextIngest(data)`
+* **Reference:** [Ingest Context Data](https://docs.mirage-ai.com/references/api/v1/#ingest-context-data)
 
 * **Request:**
 
