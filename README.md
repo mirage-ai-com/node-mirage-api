@@ -69,7 +69,7 @@ This library implements all methods the Mirage API provides. See the [API docs](
 
 #### ➡️ Transcribe Speech
 
-* **Method:** `client.Task.TranscribeSpeech(data, { stream })`
+* **Method:** `client.Task.TranscribeSpeech(data, { requestID?, stream? })`
 * **Reference:** [Transcribe Speech](https://docs.mirage-ai.com/references/api/v1/#transcribe-speech)
 
 * **Request:**
@@ -121,7 +121,7 @@ client.Task.TranscribeSpeech(
 
 #### ➡️ Answer Question
 
-* **Method:** `client.Task.AnswerQuestion(data, { stream })`
+* **Method:** `client.Task.AnswerQuestion(data, { requestID?, stream? })`
 * **Reference:** [Answer Question](https://docs.mirage-ai.com/references/api/v1/#answer-question)
 
 * **Request:**
@@ -215,7 +215,7 @@ client.Task.AnswerQuestion(
 
 #### ➡️ Summarize Conversation
 
-* **Method:** `client.Task.SummarizeConversation(data)`
+* **Method:** `client.Task.SummarizeConversation(data, { requestID? })`
 * **Reference:** [Summarize Conversation](https://docs.mirage-ai.com/references/api/v1/#summarize-conversation)
 
 * **Request:**
@@ -250,7 +250,7 @@ client.Task.SummarizeConversation({
 
 #### ➡️ Categorize Conversation
 
-* **Method:** `client.Task.CategorizeConversation(data)`
+* **Method:** `client.Task.CategorizeConversation(data, { requestID? })`
 * **Reference:** [Categorize Conversation](https://docs.mirage-ai.com/references/api/v1/#categorize-conversation)
 
 * **Request:**
@@ -285,7 +285,7 @@ client.Task.CategorizeConversation({
 
 #### ➡️ Translate Text
 
-* **Method:** `client.Task.TranslateText(data)`
+* **Method:** `client.Task.TranslateText(data, { requestID? })`
 * **Reference:** [Translate Text](https://docs.mirage-ai.com/references/api/v1/#translate-text)
 
 * **Request:**
@@ -318,7 +318,7 @@ client.Task.TranslateText({
 
 #### ➡️ Context Ingest
 
-* **Method:** `client.Data.ContextIngest(data)`
+* **Method:** `client.Data.ContextIngest(data, { requestID? })`
 * **Reference:** [Ingest Context Data](https://docs.mirage-ai.com/references/api/v1/#ingest-context-data)
 
 * **Request:**
