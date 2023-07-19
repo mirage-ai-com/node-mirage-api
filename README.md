@@ -213,6 +213,39 @@ client.Task.AnswerQuestion(
 {"index": 4, "chunk": ""}
 ```
 
+#### ➡️ Summarize Paragraphs
+
+* **Method:** `client.Task.SummarizeParagraphs(data, { trace? })`
+* **Reference:** [Summarize Paragraphs](https://docs.mirage-ai.com/references/api/v1/#summarize-paragraphs)
+
+* **Request:**
+
+```javascript
+client.Task.SummarizeParagraphs({
+  "paragraphs": [
+    {
+      "text": "GPT-4 is getting worse over time, not better."
+    },
+
+    {
+      "text": "Many people have reported noticing a significant degradation in the quality of the model responses, but so far, it was all anecdotal."
+    }
+  ]
+});
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "summary": "GPT-4 is getting worse over time, not better. We have a new version of GPT-4 that is not improving, but it is regressing."
+  }
+}
+```
+
 #### ➡️ Summarize Conversation
 
 * **Method:** `client.Task.SummarizeConversation(data, { trace? })`
