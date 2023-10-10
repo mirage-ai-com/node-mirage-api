@@ -6,7 +6,7 @@ The Mirage API NodeJS wrapper. Access AI inference services.
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 14/05/2023
+* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 09/10/2023
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -312,6 +312,58 @@ client.Task.CategorizeConversation({
 
   "data": {
     "category": "Chatbot Configuration Issue"
+  }
+}
+```
+
+#### ➡️ Rank Question
+
+* **Method:** `client.Task.RankQuestion(data, { trace? })`
+* **Reference:** [Rank Question](https://docs.mirage-ai.com/references/api/v1/#rank-question)
+
+* **Request:**
+
+```javascript
+client.Task.RankQuestion({
+  "question": "Hi! I am having issues setting up DNS records for my Crisp helpdesk. Can you help?",
+  "source": "helpdesk",
+
+  "context": {
+    "team": {
+      "id": "cf4ccdb5-df44-4668-a9e7-3ab31bebf89b",
+      "name": "Crisp"
+    }
+  }
+});
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "results": [
+      {
+        "id": "15fd3f24-56c8-435e-af8e-c47d4cd6115c",
+        "score": 9,
+        "grouped_text": "Setup your Helpdesk domain name\ntutorials for most providers",
+
+        "items": [
+          {
+            "source": "helpdesk",
+            "primary_id": "51a32e4c-1cb5-47c9-bcc0-3e06f0dce90a",
+            "secondary_id": "15fd3f24-56c8-435e-af8e-c47d4cd6115c",
+            "text": "Setup your Helpdesk domain name\ntutorials for most providers",
+
+            "metadata": {
+              "title": "Setup your Helpdesk domain name"
+            }
+          }
+        ]
+      }
+    ]
   }
 }
 ```
