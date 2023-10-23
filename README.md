@@ -281,24 +281,28 @@ client.Task.SummarizeConversation({
 }
 ```
 
-#### ➡️ Categorize Conversation
+#### ➡️ Categorize Conversations
 
-* **Method:** `client.Task.CategorizeConversation(data, { trace? })`
-* **Reference:** [Categorize Conversation](https://docs.mirage-ai.com/references/api/v1/#categorize-conversation)
+* **Method:** `client.Task.CategorizeConversations(data, { trace? })`
+* **Reference:** [Categorize Conversations](https://docs.mirage-ai.com/references/api/v1/#categorize-conversations)
 
 * **Request:**
 
 ```javascript
-client.Task.CategorizeConversation({
-  "transcript": [
+client.Task.CategorizeConversations({
+  "conversations": [
     {
-      "from": "customer",
-      "text": "Hello! I have a question about the Crisp chatbot, I am trying to setup a week-end auto-responder, how can I do that?"
-    },
+      "transcript": [
+        {
+          "from": "customer",
+          "text": "Hello! I have a question about the Crisp chatbot, I am trying to setup a week-end auto-responder, how can I do that?"
+        },
 
-    {
-      "from": "agent",
-      "text": "Hi. Baptiste here. I can provide you an example bot scenario that does just that if you'd like?"
+        {
+          "from": "agent",
+          "text": "Hi. Baptiste here. I can provide you an example bot scenario that does just that if you'd like?"
+        }
+      ]
     }
   ]
 });
@@ -311,7 +315,9 @@ client.Task.CategorizeConversation({
   "reason": "processed",
 
   "data": {
-    "category": "Chatbot Configuration Issue"
+    "categories": [
+      "Chatbot Configuration Issue"
+    ]
   }
 }
 ```
