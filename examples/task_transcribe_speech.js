@@ -25,7 +25,7 @@ client.Task.TranscribeSpeech({
   },
 
   media : {
-    type : "audio/mp3",
+    type : "audio/webm",
 
     url  : (
       "https://storage.crisp.chat"  +
