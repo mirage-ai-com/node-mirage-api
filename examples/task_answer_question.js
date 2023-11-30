@@ -29,49 +29,23 @@ client.Task.AnswerQuestion(
     },
 
     "context": {
-      "team": {
-        "id": "cf4ccdb5-df44-4668-a9e7-3ab31bebf89b",
-        "name": "Crisp"
-      },
+      "primary_id": "cf4ccdb5-df44-4668-a9e7-3ab31bebf89b",
 
-      "transcripts": {
-        "conversation": {
-          "messages": [
-            {
-              "from": "customer",
-              "text": "Hey there!"
-            },
-
-            {
-              "from": "agent",
-              "text": "Hi. How can I help?"
-            },
-
-            {
-              "from": "customer",
-              "text": "I want to add more sub-domains to my website."
-            }
-          ]
-        },
-
-        "related": [
+      "conversation": {
+        "messages": [
           {
-            "messages": [
-              {
-                "from": "customer",
-                "text": "Hi, does the \"per website\" pricing include sub-domains?"
-              },
+            "from": "customer",
+            "text": "Hey there!"
+          },
 
-              {
-                "from": "agent",
-                "text": "Hi, yes, it includes sub-domains"
-              },
+          {
+            "from": "agent",
+            "text": "Hi. How can I help?"
+          },
 
-              {
-                "from": "customer",
-                "text": "Perfect thanks!"
-              }
-            ]
+          {
+            "from": "customer",
+            "text": "I want to add more sub-domains to my website."
           }
         ]
       }
