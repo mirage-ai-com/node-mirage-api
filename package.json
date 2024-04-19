@@ -1,7 +1,7 @@
 {
   "name": "mirage-api",
   "description": "Mirage API Node.",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "homepage": "https://github.com/mirage-ai-com/node-mirage-api",
   "license": "MIT",
   "author": {
