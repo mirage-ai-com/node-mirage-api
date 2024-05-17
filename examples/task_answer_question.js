@@ -58,12 +58,24 @@ client.Task.AnswerQuestion(
 )
   .then(function(stream) {
     // Bind all event listeners on created stream
-    stream.on("data", function(data) {
-      console.log("Got partial data:", data);
+    stream.on("model", function(data) {
+      console.log("Got partial data (model):", data);
+    });
+
+    stream.on("source", function(data) {
+      console.log("Got partial data (source):", data);
+    });
+
+    stream.on("answer", function(data) {
+      console.log("Got partial data (answer):", data);
     });
 
     stream.on("error", function(error) {
       console.error("Answering aborted:", error);
+    });
+
+    stream.on("start", function() {
+      console.info("Start receiving answer...");
     });
 
     stream.on("done", function() {

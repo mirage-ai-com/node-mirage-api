@@ -116,7 +116,17 @@ client.Task.TranscribeSpeech(
 * **Response (stream):**
 
 ```
-{"start": 5.0, "end": 9.0, "text": " I'm just speaking some seconds to see if the translation is correct"}
+event: system
+data: [START]
+
+event: locale
+data: "en"
+
+event: part
+data: {"start": 5.0, "end": 9.0, "text": " I'm just speaking some seconds to see if the translation is correct"}
+
+event: system
+data: [DONE]
 ```
 
 #### ➡️ Answer Prompt
@@ -206,11 +216,29 @@ client.Task.AnswerQuestion(
 * **Response (stream):**
 
 ```
+event: system
+data: [START]
+
+event: model
+data: "medium"
+
+event: answer
 {"index": 0, "chunk": "You can add the Crisp chatbox to"}
+
+event: answer
 {"index": 1, "chunk": " your website by following this guide:"}
+
+event: answer
 {"index": 2, "chunk": " https://help.crisp.chat/en/article/how-to-add-crisp-chatbox-to-your-website-dkrg1d/"}
+
+event: answer
 {"index": 3, "chunk": " :)"}
+
+event: answer
 {"index": 4, "chunk": ""}
+
+event: system
+data: [DONE]
 ```
 
 #### ➡️ Summarize Paragraphs
