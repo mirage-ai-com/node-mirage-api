@@ -70,6 +70,10 @@ client.Task.AnswerQuestion(
       console.log("Got partial data (answer):", data);
     });
 
+    stream.on("data", function(data) {
+      console.log("Got partial data:", data);
+    });
+
     stream.on("error", function(error) {
       console.error("Answering aborted:", error);
     });
