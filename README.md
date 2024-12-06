@@ -490,9 +490,9 @@ client.Task.SpamClassify({
   "reason": "processed",
 
   "data": {
-    "fraud": false,
-    "score": 0.13,
-    "logprob": -0.01
+    "class": "spam",
+    "confidence": 0.13,
+    "logprob": -0.10
   }
 }
 ```
