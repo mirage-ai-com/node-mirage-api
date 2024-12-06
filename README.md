@@ -6,7 +6,7 @@ The Mirage API NodeJS wrapper. Access AI inference services.
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 19/12/2023
+* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 06/12/2024
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -455,6 +455,44 @@ client.Task.FraudSpamicity({
   "data": {
     "fraud": false,
     "score": 0.13
+  }
+}
+```
+
+#### ➡️ Spam Classify
+
+* **Method:** `client.Task.SpamClassify(data, { trace? })`
+* **Reference:** [Spam Classify](https://docs.mirage-ai.com/references/api/v1/#spam-classify)
+
+* **Request:**
+
+```javascript
+client.Task.SpamClassify({
+  "sender": {
+    "name": "John Doe",
+    "email": "john@example.com"
+  },
+  
+  "transcript": [
+    {
+      "from": "customer",
+      "origin": "chat",
+      "text": "Hello, I would like to discuss your services"
+    }
+  ]
+});
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "fraud": false,
+    "score": 0.13,
+    "logprob": -0.01
   }
 }
 ```
