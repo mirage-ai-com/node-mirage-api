@@ -491,8 +491,15 @@ client.Task.SpamClassify({
 
   "data": {
     "class": "spam",
-    "confidence": 0.13,
-    "logprob": -0.10
+    "confidence": 0.93,
+    "logprob": -0.10,
+
+    "scores": {
+        "gibberish": 0.0,
+        "marketing": 0.45,
+        "regular": 0.0,
+        "spam": 0.93
+    }
   }
 }
 ```
