@@ -459,15 +459,15 @@ client.Task.FraudSpamicity({
 }
 ```
 
-#### ➡️ Spam Classify
+#### ➡️ Spam Conversation
 
-* **Method:** `client.Task.SpamClassify(data, { trace? })`
-* **Reference:** [Spam Classify](https://docs.mirage-ai.com/references/api/v1/#spam-classify)
+* **Method:** `client.Task.SpamConversation(data, { trace? })`
+* **Reference:** [Spam Conversation](https://docs.mirage-ai.com/references/api/v1/#spam-conversation)
 
 * **Request:**
 
 ```javascript
-client.Task.SpamClassify({
+client.Task.SpamConversation({
   "sender": {
     "name": "John Doe",
     "email": "john@example.com"
@@ -499,6 +499,43 @@ client.Task.SpamClassify({
       "marketing": 0.45,
       "regular": 0.0,
       "spam": 0.93
+    }
+  }
+}
+```
+
+#### ➡️ Spam Document
+
+* **Method:** `client.Task.SpamDocument(data, { trace? })`
+* **Reference:** [Spam Document](https://docs.mirage-ai.com/references/api/v1/#spam-document)
+
+* **Request:**
+
+```javascript
+client.Task.SpamDocument({
+  "name": "Spammy Domain",
+  "domain": "spammy-domain.crisp.help",
+  "title": "Spammy title",
+  "content": "Spammy content"
+});
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "class": "spam",
+    "confidence": 0.82,
+    "logprob": -0.10,
+
+    "scores": {
+        "gibberish": 0.0,
+        "marketing": 0.0,
+        "regular": 0.0,
+        "spam": 0.82
     }
   }
 }
