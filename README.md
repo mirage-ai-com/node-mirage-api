@@ -6,7 +6,7 @@ The Mirage API NodeJS wrapper. Access AI inference services.
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 06/12/2024
+* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 06/18/2025
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
