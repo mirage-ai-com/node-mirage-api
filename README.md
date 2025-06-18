@@ -241,6 +241,71 @@ event: system
 data: [DONE]
 ```
 
+#### ➡️ Answer Chat
+
+* **Method:** `client.Task.AnswerChat(data, { trace?, stream? })`
+* **Reference:** [Answer Chat](https://docs.mirage-ai.com/references/api/v1/#answer-chat)
+
+* **Request:**
+
+```javascript
+client.Task.AnswerChat(
+  {
+    "context": {
+      "conversation": {
+        "messages": [
+          {
+            "from": "user",
+            "text": "Where is my order?"
+          }
+        ]
+      }
+    },
+
+    "tools": [{
+      "type": "function",
+      "function": {
+        "name": "get-order-details",
+        "description": "Retrieves a user order details.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "customer email"
+            },
+            "order_number": {
+              "type": "string",
+              "description": "an order number"
+            }
+          },
+          "required": ["email", "order_number"]
+        }
+      }
+    }],
+
+    "model": "medium"
+  },
+
+  {
+    stream: false
+  }
+);
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "answer": "Sure! What is your email and order number?",
+    "model": "medium"
+  }
+}
+```
+
 #### ➡️ Summarize Paragraphs
 
 * **Method:** `client.Task.SummarizeParagraphs(data, { trace? })`
