@@ -262,27 +262,37 @@ client.Task.AnswerChat(
       }
     },
 
-    "tools": [{
-      "type": "function",
-      "function": {
-        "name": "get-order-details",
-        "description": "Retrieves a user order details.",
-        "parameters": {
-          "type": "object",
-          "properties": {
-            "email": {
-              "type": "string",
-              "description": "customer email"
+    "tools": [
+      {
+        "type": "function",
+
+        "function": {
+          "name": "get-order-details",
+          "description": "Retrieves a user order details.",
+
+          "parameters": {
+            "type": "object",
+
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "customer email"
+              },
+
+              "order_number": {
+                "type": "string",
+                "description": "an order number"
+              }
             },
-            "order_number": {
-              "type": "string",
-              "description": "an order number"
-            }
-          },
-          "required": ["email", "order_number"]
+
+            "required": [
+              "email",
+              "order_number"
+            ]
+          }
         }
       }
-    }],
+    ],
 
     "model": "medium"
   },
