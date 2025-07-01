@@ -6,7 +6,7 @@ The Mirage API NodeJS wrapper. Access AI inference services.
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 06/18/2025
+* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 07/01/2025
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -421,6 +421,31 @@ client.Task.CategorizeConversations({
     "categories": [
       "Chatbot Configuration Issue"
     ]
+  }
+}
+```
+
+#### ➡️ Categorize Question
+
+* **Method:** `client.Task.CategorizeQuestion(data, { trace? })`
+* **Reference:** [Categorize Question](https://docs.mirage-ai.com/references/api/v1/#categorize-question)
+
+* **Request:**
+
+```javascript
+client.Task.CategorizeQuestion({
+  "question": "Hello. I have a question."
+});
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "category": "Opener"
   }
 }
 ```
