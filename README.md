@@ -445,7 +445,7 @@ client.Task.CategorizeQuestion({
   "reason": "processed",
 
   "data": {
-    "category": "Opener"
+    "category": "opener"
   }
 }
 ```
