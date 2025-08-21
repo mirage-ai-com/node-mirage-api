@@ -1,0 +1,17 @@
+{
+  "include": ["lib/**/*.ts"],
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "dist/",
+    "module": "commonjs",
+    "target": "es6",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["lib/*"]
+    },
+  }
+}
