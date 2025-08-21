@@ -9,15 +9,15 @@
 "use strict";
 
 
-var Mirage = require("../").Mirage;
+var Mirage = require("../dist/mirage").Mirage;
 var assert = require("assert");
 
 
-describe("node-mirage-api", function() {
-  describe("constructor", function() {
-    it("should succeed creating an instance with valid options", function() {
+describe("node-mirage-api", () => {
+  describe("constructor",  () => {
+    it("should succeed creating an instance with valid options", () => {
       assert.doesNotThrow(
-        function() {
+        () => {
           new Mirage("dummy_user_id", "dummy_secret_key");
         },
 
@@ -25,9 +25,9 @@ describe("node-mirage-api", function() {
       );
     });
 
-    it("should fail creating an instance with missing secret_key", function() {
+    it("should fail creating an instance with missing secret_key", () => {
       assert.throws(
-        function() {
+        () => {
           new Mirage("dummy_user_id");
         },
 
@@ -35,9 +35,9 @@ describe("node-mirage-api", function() {
       );
     });
 
-    it("should fail creating an instance with empty user_id", function() {
+    it("should fail creating an instance with empty user_id", () => {
       assert.throws(
-        function() {
+        () => {
           new Mirage("", "dummy_secret_key");
         },
 
