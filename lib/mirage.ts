@@ -19,6 +19,10 @@ import https from "https";
 import Task from "./resources/task";
 import Data from "./resources/data";
 
+/**************************************************************************
+ * CONSTANTS
+ ***************************************************************************/
+
 const DEFAULT_REST_HOST = "https://api.mirage-ai.com";
 const DEFAULT_REST_BASE = "/v1";
 const DEFAULT_TIMEOUT   = 40000;
@@ -39,7 +43,7 @@ const STREAM_RESERVED_EVENTS = [
 export { Task, Data };
 
 /**************************************************************************
- * TYPES
+ * INTERFACES
  ***************************************************************************/
 
 export interface MirageOptions {
