@@ -9,7 +9,7 @@
 "use strict";
 
 
-var Mirage = require("../dist/mirage").default;
+var Mirage = require("../dist/mirage").Mirage;
 var assert = require("assert");
 
 

@@ -465,8 +465,6 @@ class Mirage {
  * EXPORTS
  ***************************************************************************/
 
-export default Mirage;
-
 export * from "./types";
 
 export { Mirage };

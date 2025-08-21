@@ -9,7 +9,9 @@
  * EXPORTS
  ***************************************************************************/
 
+export * from "./answer";
 export * from "./categorize";
+export * from "./fraud";
 export * from "./ingest";
 export * from "./rank";
 export * from "./spam";
