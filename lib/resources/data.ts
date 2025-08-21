@@ -5,33 +5,30 @@
  * Author: Valerian Saliou <valerian@valeriansaliou.name>
  */
 
+/**************************************************************************
+ * IMPORTS
+ ***************************************************************************/
 
-import BaseResource from "./base-resource";
-import { RequestOptions } from "../mirage";
+// PROJECT: MAIN
+import { RequestOptions } from "@/mirage";
 
-export interface IngestContextDataRequest {
-  items: IngestContextDataRequestItem[];
-}
+// PROJECT: RESOURCES
+import BaseResource from "@/resources/base-resource";
 
-export interface IngestContextDataRequestItem {
-  operation: string;
-  primary_id: string;
-  secondary_id?: string;
-  tertiary_id?: string;
-  text?: string;
-  timestamp?: number;
-  source?: string;
-  metadata?: Record<string, string>;
-}
+// PROJECT: TYPES
+import {
+  IngestContextDataRequest,
+  IngestContextDataResponse
+} from "@/types/ingest";
 
-export interface IngestContextDataResponse {
-  imported: boolean;
-}
+/**************************************************************************
+ * CLASSES
+ ***************************************************************************/
 
 /**
  * Data
  */
-class Data extends BaseResource {
+export default class Data extends BaseResource {
   /**
    * ContextIngest
    */
@@ -41,6 +38,3 @@ class Data extends BaseResource {
     return this.parent.post("/data/context/ingest", data, options);
   }
 }
-
-
-export default Data;

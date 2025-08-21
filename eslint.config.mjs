@@ -86,7 +86,7 @@ export default defineConfig([
           "offsetTernaryExpressions": true
         }
       ],
-      //"key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
+      "key-spacing": ["error", { "beforeColon": false, "afterColon": true }],
       "keyword-spacing": "error",
       "linebreak-style": ["error", "unix"],
       "newline-per-chained-call": "error",
@@ -95,7 +95,7 @@ export default defineConfig([
       "no-eval": "error",
       "no-implicit-coercion": "error",
       "no-multi-str": "error",
-      "no-multiple-empty-lines": ["error", { max: 2 }],
+      "no-multiple-empty-lines": ["error", { max: 1 }],
       "no-mixed-spaces-and-tabs": "error",
       "no-restricted-syntax": [
         "error",
@@ -152,6 +152,8 @@ export default defineConfig([
       "crisp/enforce-optional": "error",
       "crisp/header-check": "error",
       "crisp/header-comments-check": "error",
+      "crisp/import-group-comment": "error",
+      "crisp/import-group-order": "error",
       "crisp/methods-naming": "error",
       "crisp/methods-ordering": "error",
       "crisp/multiline-comment-end-backslash": "error",

@@ -5,12 +5,14 @@
  * Author: Valerian Saliou <valerian@valeriansaliou.name>
  */
 
+/**************************************************************************
+ * TYPES
+ ***************************************************************************/
 
 export interface RankQuestionRequest {
   question: string;
   context: RankQuestionRequestContext;
 }
-
 
 export interface RankQuestionRequestContext {
   source?: string;

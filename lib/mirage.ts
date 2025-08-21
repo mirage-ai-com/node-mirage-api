@@ -5,14 +5,17 @@
  * Author: Valerian Saliou <valerian@valeriansaliou.name>
  */
 
+/**************************************************************************
+ * IMPORTS
+ ***************************************************************************/
 
-"use strict";
-
-import events  from "events";
+// NPM
+import events from "events";
 import restler from "restler";
-import http    from "http";
-import https   from "https";
+import http from "http";
+import https from "https";
 
+// PROJECT: LIB
 import Task from "./resources/task";
 import Data from "./resources/data";
 
@@ -20,18 +23,24 @@ const DEFAULT_REST_HOST = "https://api.mirage-ai.com";
 const DEFAULT_REST_BASE = "/v1";
 const DEFAULT_TIMEOUT   = 40000;
 
-const STREAM_EVENT_PREFIX        = "event:";
-const STREAM_DATA_PREFIX         = "data:";
-const STREAM_START_TAG           = "[START]";
-const STREAM_DONE_TAG            = "[DONE]";
+const STREAM_EVENT_PREFIX = "event:";
+const STREAM_DATA_PREFIX = "data:";
+const STREAM_START_TAG = "[START]";
+const STREAM_DONE_TAG = "[DONE]";
 const STREAM_CHUNK_STALL_TIMEOUT = 10000;
 
-const STREAM_RESERVED_EVENTS     = [
+const STREAM_RESERVED_EVENTS = [
   "start",
   "done",
   "error",
   "end"
 ];
+
+export { Task, Data };
+
+/**************************************************************************
+ * TYPES
+ ***************************************************************************/
 
 export interface MirageOptions {
   rest_host?: string;
@@ -66,6 +75,10 @@ interface MirageAgents {
   stream: http.Agent;
 }
 
+/**************************************************************************
+ * CLASSES
+ ***************************************************************************/
+
 /**
  * Mirage
  */
@@ -99,17 +112,17 @@ class Mirage {
 
     // Prepare storage
     this.auth = {
-      username : userID,
-      password : secretKey
+      username: userID,
+      password: secretKey
     };
 
     this.rest = {
-      host : (options.rest_host || DEFAULT_REST_HOST),
-      base : (options.rest_base || DEFAULT_REST_BASE)
+      host: (options.rest_host || DEFAULT_REST_HOST),
+      base: (options.rest_base || DEFAULT_REST_BASE)
     };
 
     this.network = {
-      timeout : (options.timeout || DEFAULT_TIMEOUT)
+      timeout: (options.timeout || DEFAULT_TIMEOUT)
     };
 
     // Initialize HTTP agents
@@ -119,20 +132,19 @@ class Mirage {
     );
 
     this.agents = {
-      data   : new _http.Agent({
-        keepAlive : true,
-        timeout   : (options.timeout || DEFAULT_TIMEOUT)
+      data: new _http.Agent({
+        keepAlive: true,
+        timeout: (options.timeout || DEFAULT_TIMEOUT)
       }),
 
-      stream : new _http.Agent({
-        keepAlive : false,
-        timeout   : (options.timeout || DEFAULT_TIMEOUT)
+      stream: new _http.Agent({
+        keepAlive: false,
+        timeout: (options.timeout || DEFAULT_TIMEOUT)
       })
     };
 
-    this.useragent = ("node-mirage-api/__PKG_VERSION__");
+    this.useragent = ("node-mirage-api/__PKG_VERSION_PLACEHOLDER__");
   }
-
 
   /**
    * Post
@@ -150,7 +162,6 @@ class Mirage {
       fnPost.bind(this)(resource, data, options, resolve, reject);
     });
   }
-
 
   /**
   * Post Data
@@ -176,24 +187,23 @@ class Mirage {
       })
       .on("error", (error) => {
         return reject({
-          reason  : "error",
-          message : (error || "Request could not be submitted.")
+          reason: "error",
+          message: (error || "Request could not be submitted.")
         });
       })
       .on("timeout", () => {
         return reject({
-          reason  : "timed_out",
-          message : "The request processing took too much time."
+          reason: "timed_out",
+          message: "The request processing took too much time."
         });
       })
       .on("fail", (error) => {
         return reject({
-          reason  : (error?.error?.reason  || "error"),
-          message : (error?.error?.message || "Unknown error reason.")
+          reason: (error?.error?.reason  || "error"),
+          message: (error?.error?.message || "Unknown error reason.")
         });
       });
   }
-
 
   /**
   * Post Stream
@@ -221,9 +231,9 @@ class Mirage {
         // Response is not successful?
         if (response.statusCode >= 400) {
           return reject({
-            reason  : "closed",
+            reason: "closed",
 
-            message : (
+            message: (
               "Stream closed, got " + response.statusCode + " error from server."
             )
           });
@@ -382,18 +392,17 @@ class Mirage {
       })
       .on("error", (error) => {
         return reject({
-          reason  : "error",
-          message : (error || "Request could not be streamed.")
+          reason: "error",
+          message: (error || "Request could not be streamed.")
         });
       })
       .on("timeout", () => {
         return reject({
-          reason  : "timed_out",
-          message : "The request streaming took too much time."
+          reason: "timed_out",
+          message: "The request streaming took too much time."
         });
       });
   }
-
 
   /**
   * Get REST URL
@@ -411,7 +420,6 @@ class Mirage {
     return restURL;
   }
 
-
   /**
   * Get request options
   */
@@ -421,7 +429,7 @@ class Mirage {
 
     // Generate headers
     let headers = {
-      "User-Agent" : this.useragent
+      "User-Agent": this.useragent
     };
 
     if (stream === true) {
@@ -438,21 +446,24 @@ class Mirage {
     }
 
     return {
-      username           : this.auth.username,
-      password           : this.auth.password,
-      timeout            : this.network.timeout,
+      username: this.auth.username,
+      password: this.auth.password,
+      timeout: this.network.timeout,
 
-      headers            : headers,
+      headers: headers,
 
-      rejectUnauthorized : true,
+      rejectUnauthorized: true,
 
-      agent              : (
+      agent: (
         (stream === true) ? this.agents.stream : this.agents.data
       )
     };
   }
 }
 
+/**************************************************************************
+ * EXPORTS
+ ***************************************************************************/
 
 export default Mirage;
 

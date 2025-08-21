@@ -5,13 +5,21 @@
  * Author: Valerian Saliou <valerian@valeriansaliou.name>
  */
 
-import BaseResource from "./base-resource";
+/**************************************************************************
+ * IMPORTS
+ ***************************************************************************/
+
+// NPM
 import { RequestOptions } from "../mirage";
 
+// PROJECT: RESOURCES
+import BaseResource from "./base-resource";
+
+// PROJECT: TYPES
 import {
   TranscribeSpeechRequest,
   TranscribeSpeechResponse
-} from "../types/transcribe";
+} from "@/types/transcribe";
 
 import {
   AnswerPromptRequest,
@@ -20,46 +28,50 @@ import {
   AnswerChatResponse,
   AnswerQuestionRequest,
   AnswerQuestionResponse
-} from "../types/answer";
+} from "@/types/answer";
 
 import {
   SummarizeParagraphsRequest,
   SummarizeGenericResponse,
   SummarizeConversationRequest
-} from "../types/summarize";
+} from "@/types/summarize";
 
 import {
   CategorizeConversationsRequest,
   CategorizeConversationsResponse,
   CategorizeQuestionRequest,
   CategorizeQuestionResponse
-} from "../types/categorize";
+} from "@/types/categorize";
 
 import {
   RankQuestionRequest,
   RankQuestionResponse
-} from "../types/rank";
+} from "@/types/rank";
 
 import {
   TranslateTextRequest,
   TranslateTextResponse
-} from "../types/translate";
+} from "@/types/translate";
 
 import {
   SpamConversationRequest,
   SpamDocumentRequest,
   SpamGenericResponse
-} from "../types/spam";
+} from "@/types/spam";
 
 import {
   FraudSpamicityRequest,
   FraudSpamicityResponse
-} from "../types/fraud";
+} from "@/types/fraud";
+
+/**************************************************************************
+ * CLASSES
+ ***************************************************************************/
 
 /**
  * Task
  */
-class Task extends BaseResource {
+export default class Task extends BaseResource {
   /**
    * TranscribeSpeech
    */
@@ -68,7 +80,6 @@ class Task extends BaseResource {
   ): Promise<TranscribeSpeechResponse> {
     return this.parent.post("/task/transcribe/speech", data, options);
   }
-
 
   /**
    * AnswerPrompt
@@ -79,7 +90,6 @@ class Task extends BaseResource {
     return this.parent.post("/task/answer/prompt", data, options);
   }
 
-
   /**
    * AnswerChat
    */
@@ -89,7 +99,6 @@ class Task extends BaseResource {
     return this.parent.post("/task/answer/chat", data, options);
   }
 
-
   /**
    * AnswerQuestion
    */
@@ -98,7 +107,6 @@ class Task extends BaseResource {
   ): Promise<AnswerQuestionResponse> {
     return this.parent.post("/task/answer/question", data, options);
   }
-
 
   /**
    * SummarizeParagraphs
@@ -110,7 +118,6 @@ class Task extends BaseResource {
     return this.parent.post("/task/summarize/paragraphs", data, options);
   }
 
-
   /**
    * SummarizeConversation
    */
@@ -120,7 +127,6 @@ class Task extends BaseResource {
   ): Promise<SummarizeGenericResponse> {
     return this.parent.post("/task/summarize/conversation", data, options);
   }
-
 
   /**
    * CategorizeConversations
@@ -132,7 +138,6 @@ class Task extends BaseResource {
     return this.parent.post("/task/categorize/conversations", data, options);
   }
 
-
   /**
    * CategorizeQuestion
    */
@@ -143,7 +148,6 @@ class Task extends BaseResource {
     return this.parent.post("/task/categorize/question", data, options);
   }
 
-
   /**
    * RankQuestion
    */
@@ -152,7 +156,6 @@ class Task extends BaseResource {
   ): Promise<RankQuestionResponse> {
     return this.parent.post("/task/rank/question", data, options);
   }
-
 
   /**
    * TranslateText
@@ -163,7 +166,6 @@ class Task extends BaseResource {
     return this.parent.post("/task/translate/text", data, options);
   }
 
-
   /**
    * FraudSpamicity
    */
@@ -172,7 +174,6 @@ class Task extends BaseResource {
   ): Promise<FraudSpamicityResponse> {
     return this.parent.post("/task/fraud/spamicity", data, options);
   }
-
 
   /**
    * SpamConversation
@@ -183,7 +184,6 @@ class Task extends BaseResource {
     return this.parent.post("/task/spam/conversation", data, options);
   }
 
-
   /**
    * SpamDocument
    */
@@ -193,6 +193,3 @@ class Task extends BaseResource {
     return this.parent.post("/task/spam/document", data, options);
   }
 }
-
-
-export default Task;

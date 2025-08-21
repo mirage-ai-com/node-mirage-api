@@ -5,6 +5,9 @@
  * Author: Valerian Saliou <valerian@valeriansaliou.name>
  */
 
+/**************************************************************************
+ * TYPES
+ ***************************************************************************/
 
 export interface TranscribeSpeechRequest {
   locale?: TranscribeSpeechRequestLocale;
