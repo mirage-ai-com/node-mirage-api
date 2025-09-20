@@ -76,6 +76,7 @@ export interface AnswerChatRequest {
   context: AnswerChatRequestContext;
   answer?: AnswerChatRequestAnswer;
   tools?: AnswerChatRequestTool[];
+  tool_choice?: AnswerChatRequestToolChoice;
 }
 
 export interface AnswerChatRequestContext {
@@ -96,6 +97,11 @@ export interface AnswerChatRequestContextConversationMessage {
 export interface AnswerChatRequestTool {
   type: string;
   function: AnswerChatRequestToolFunction;
+}
+
+export interface AnswerChatRequestToolChoice {
+  mode: "auto" | "required";
+  tools?: string[];
 }
 
 export interface AnswerChatRequestAnswer {
