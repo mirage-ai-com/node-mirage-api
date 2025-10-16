@@ -33,5 +33,3 @@ jobs:
 
       - name: Release package
         run: npm publish --ignore-scripts --provenance
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
