@@ -20,6 +20,8 @@ export interface AnswerPromptRequestAnswer {
   max_tokens?: number;
   temperature?: number;
   think?: boolean;
+  logprobs?: boolean;
+  top_logprobs?: number;
 }
 
 export interface AnswerQuestionRequest {
@@ -108,6 +110,8 @@ export interface AnswerChatRequestAnswer {
   max_tokens?: number;
   temperature?: number;
   think?: boolean;
+  logprobs?: boolean;
+  top_logprobs?: number;
 }
 
 export interface AnswerChatRequestToolFunction {
@@ -120,6 +124,30 @@ export interface AnswerPromptResponse {
   answer: string;
   model: string;
   thinking?: string;
+  sources?: AnswerPromptResponseSource[];
+  logprobs?: AnswerPromptResponseLogprob[];
+}
+
+export interface AnswerPromptResponseSource {
+  source?: string;
+  score?: number;
+  primary_id?: string;
+  secondary_id?: string;
+  excerpt?: string;
+  timestamp?: number;
+  metadata?: Record<string, string>;
+}
+
+export interface AnswerPromptResponseLogprob {
+  token: string;
+  logprob: number;
+  top_logprobs?: AnswerPromptResponseLogprobTop[];
+}
+
+export interface AnswerPromptResponseLogprobTop {
+  token: string;
+  logprob: number;
+  bytes?: number[];
 }
 
 export interface AnswerQuestionResponse {
@@ -144,6 +172,19 @@ export interface AnswerChatResponse {
   model: string;
   thinking?: string;
   tool_calls?: AnswerChatResponseToolCall[];
+  logprobs?: AnswerChatResponseLogprob[];
+}
+
+export interface AnswerChatResponseLogprob {
+  token: string;
+  logprob: number;
+  top_logprobs?: AnswerChatResponseLogprobTop[];
+}
+
+export interface AnswerChatResponseLogprobTop {
+  token: string;
+  logprob: number;
+  bytes?: number[];
 }
 
 export interface AnswerChatResponseChunkAnswer {
@@ -158,6 +199,8 @@ export interface AnswerChatResponseStreamable {
   on(event: "thinking", callback: (data: AnswerChatResponseChunkAnswer) => void): void;
   // eslint-disable-next-line no-unused-vars
   on(event: "tool_calls", callback: (data: AnswerChatResponseToolCall[]) => void): void;
+  // eslint-disable-next-line no-unused-vars
+  on(event: "logprobs", callback: (data: AnswerChatResponseLogprob) => void): void;
   // eslint-disable-next-line no-unused-vars
   on(event: "data", callback: (data: unknown) => void): void;
   // eslint-disable-next-line no-unused-vars
