@@ -9,6 +9,9 @@
  * INTERFACES
  ***************************************************************************/
 
+export type CategorizeCategory = "opener" | "question" | "statement";
+export type CategorizeConversationCategory = string;
+
 export interface CategorizeConversationsRequest {
   conversations: CategorizeConversationsRequestConversation[];
 }
@@ -27,9 +30,12 @@ export interface CategorizeQuestionRequest {
 }
 
 export interface CategorizeConversationsResponse {
-  categories: string[];
+  categories: CategorizeConversationCategory[];
 }
 
 export interface CategorizeQuestionResponse {
-  category: string;
+  category: CategorizeCategory;
+  score: number;
+  logprob: number;
+  scores: Record<CategorizeCategory, number>;
 }
