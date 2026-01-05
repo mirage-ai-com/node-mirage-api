@@ -325,14 +325,18 @@ class Mirage {
                 //   special non-user level events.
                 if (eventBlock === "system") {
                   if (dataPart === STREAM_START_TAG) {
-                    // Raise 'start' event
-                    emitter.emit("start");
+                    // Raise 'start' event (deferred to avoid race condition)
+                    setImmediate(() => {
+                      emitter.emit("start");
+                    });
                   } else if (dataPart === STREAM_DONE_TAG) {
                     // Clear previous stall timeout (as needed)
                     fnCancelNextChunkStall();
 
-                    // Raise 'done' event
-                    emitter.emit("done");
+                    // Raise 'done' event (deferred to avoid race condition)
+                    setImmediate(() => {
+                      emitter.emit("done");
+                    });
                   }
                 } else {
                   let dataPartObject = JSON.parse(dataPart);
@@ -347,7 +351,12 @@ class Mirage {
                   }
 
                   // Raise event (fallback to 'data' if no event block)
-                  emitter.emit(eventName, dataPartObject);
+                  // Deferred with setImmediate to ensure caller has time to
+                  // attach listeners after receiving the emitter from await
+                  // (setImmediate runs AFTER Promise microtasks)
+                  setImmediate(() => {
+                    emitter.emit(eventName, dataPartObject);
+                  });
                 }
 
                 // Abort parsing of line there.
