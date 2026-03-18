@@ -6,7 +6,7 @@ The Mirage API NodeJS wrapper. Access AI inference services.
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 15/11/2025
+* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 18/03/2025
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -637,6 +637,95 @@ client.Task.SpamDocument({
       "regular": 0.0,
       "spam": 0.82
     }
+  }
+}
+```
+
+#### ➡️ Cluster Items
+
+* **Method:** `client.Task.ClusterItems(data, { trace? })`
+* **Reference:** [Cluster Items](https://docs.mirage-ai.com/references/api/v1/#cluster-items)
+
+* **Request:**
+
+```javascript
+client.Task.ClusterItems({
+  "items": [
+    {
+      "secondary_id": "q1",
+      "text": "How do I reset my password?",
+      "text_bag": "password reset"
+    },
+
+    {
+      "secondary_id": "q2",
+      "text": "I forgot my password",
+      "text_bag": "password forgot"
+    },
+
+    {
+      "secondary_id": "q3",
+      "text": "What are your business hours?"
+    },
+
+    {
+      "secondary_id": "q4",
+      "text": "When are you open?"
+    }
+  ],
+
+  "min_cluster_size": 2
+});
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "clusters": [
+      {
+        "cluster_uid": "5a8228c7c2a55d1e",
+        "parent_cluster_uid": null,
+        "size": 2,
+        "canonical_text": "How do I reset my password?",
+
+        "items": [
+          {
+            "secondary_id": "q1",
+            "text": "How do I reset my password?",
+            "text_bag": "password reset"
+          },
+
+          {
+            "secondary_id": "q2",
+            "text": "I forgot my password",
+            "text_bag": "password forgot"
+          }
+        ]
+      },
+
+      {
+        "cluster_uid": "8b3f19d4e7a12c09",
+        "parent_cluster_uid": null,
+        "size": 2,
+        "canonical_text": "What are your business hours?",
+
+        "items": [
+          {
+            "secondary_id": "q3",
+            "text": "What are your business hours?"
+          },
+
+          {
+            "secondary_id": "q4",
+            "text": "When are you open?"
+          }
+        ]
+      }
+    ]
   }
 }
 ```

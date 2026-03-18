@@ -65,6 +65,11 @@ import {
   FraudSpamicityResponse
 } from "@/types/fraud";
 
+import {
+  ClusterItemsRequest,
+  ClusterItemsResponse
+} from "@/types/cluster";
+
 /**************************************************************************
  * CLASSES
  ***************************************************************************/
@@ -192,5 +197,14 @@ export default class Task extends BaseResource {
     data: SpamDocumentRequest, options?: RequestOptions
   ): Promise<SpamGenericResponse> {
     return this.parent.post("/task/spam/document", data, options);
+  }
+
+  /**
+   * ClusterItems
+   */
+  ClusterItems(
+    data: ClusterItemsRequest, options?: RequestOptions
+  ): Promise<ClusterItemsResponse> {
+    return this.parent.post("/task/cluster/items", data, options);
   }
 }

@@ -11,6 +11,7 @@
 
 export * from "./answer";
 export * from "./categorize";
+export * from "./cluster";
 export * from "./fraud";
 export * from "./ingest";
 export * from "./rank";
