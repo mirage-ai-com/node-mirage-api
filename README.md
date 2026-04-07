@@ -6,7 +6,7 @@ The Mirage API NodeJS wrapper. Access AI inference services.
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 18/03/2025
+* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 07/04/2026
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -725,6 +725,41 @@ client.Task.ClusterItems({
           }
         ]
       }
+    ]
+  }
+}
+```
+
+#### ➡️ Embedding Texts
+
+* **Method:** `client.Task.EmbeddingTexts(data, { trace? })`
+* **Reference:** [Embed Texts](https://docs.mirage-ai.com/references/api/v1/#embed-texts)
+
+* **Request:**
+
+```javascript
+client.Task.EmbeddingTexts({
+  "texts": [
+    "How do I reset my password?",
+    "I forgot my password",
+    "What are your business hours?"
+  ],
+
+  "instruction": "classification"
+});
+```
+
+* **Response:**
+
+```json
+{
+  "reason": "processed",
+
+  "data": {
+    "embeddings": [
+      [0.0234, -0.0567, 0.0891],
+      [0.0345, -0.0678, 0.0912],
+      [0.0456, -0.0789, 0.0123]
     ]
   }
 }

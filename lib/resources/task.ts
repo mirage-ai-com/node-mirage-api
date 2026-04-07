@@ -70,6 +70,11 @@ import {
   ClusterItemsResponse
 } from "@/types/cluster";
 
+import {
+  EmbeddingTextsRequest,
+  EmbeddingTextsResponse
+} from "@/types/embedding";
+
 /**************************************************************************
  * CLASSES
  ***************************************************************************/
@@ -206,5 +211,14 @@ export default class Task extends BaseResource {
     data: ClusterItemsRequest, options?: RequestOptions
   ): Promise<ClusterItemsResponse> {
     return this.parent.post("/task/cluster/items", data, options);
+  }
+
+  /**
+   * EmbeddingTexts
+   */
+  EmbeddingTexts(
+    data: EmbeddingTextsRequest, options?: RequestOptions
+  ): Promise<EmbeddingTextsResponse> {
+    return this.parent.post("/task/embedding/texts", data, options);
   }
 }
