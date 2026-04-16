@@ -772,7 +772,7 @@ client.Task.EmbeddingTexts({
 * **Method:** `client.Data.ContextIngest(data, { trace? })`
 * **Reference:** [Ingest Context Data](https://docs.mirage-ai.com/references/api/v1/#ingest-context-data)
 
-* **Request:**
+* **Request (Index):**
 
 ```javascript
 client.Data.ContextIngest({
@@ -790,6 +790,25 @@ client.Data.ContextIngest({
       "metadata": {
         "custom_key": "custom_value",
         "another_key": "another_value"
+      }
+    }
+  ]
+});
+```
+
+* **Request (Purge):**
+
+```javascript
+client.Data.ContextIngest({
+  "items": [
+    {
+      "operation": "delete",
+      "scope": "purge",
+      "primary_id": "pri_cf44dd72-4ba9-4754-8fb3-83c4261243c4",
+      "source": "helpdesk",
+
+      "metadata": {
+        "locale_id": "loc_6693a4a2-e33f-4cce-ba90-b7b5b0922c46"
       }
     }
   ]

@@ -14,14 +14,15 @@ export interface IngestContextDataRequest {
 }
 
 export interface IngestContextDataRequestItem {
-  operation: string;
+  operation?: "index" | "reindex" | "delete";
+  scope?: "purge";
   primary_id: string;
   secondary_id?: string;
   tertiary_id?: string;
   text?: string;
   timestamp?: number;
   source?: string;
-  metadata?: Record<string, string>;
+  metadata?: Record<string, string | boolean>;
 }
 
 export interface IngestContextDataResponse {
