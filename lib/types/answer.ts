@@ -194,6 +194,8 @@ export interface AnswerChatResponseChunkAnswer {
 
 export interface AnswerChatResponseStreamable {
   // eslint-disable-next-line no-unused-vars
+  abort(reason?: string): void;
+  // eslint-disable-next-line no-unused-vars
   on(event: "answer", callback: (data: AnswerChatResponseChunkAnswer) => void): void;
   // eslint-disable-next-line no-unused-vars
   on(event: "thinking", callback: (data: AnswerChatResponseChunkAnswer) => void): void;

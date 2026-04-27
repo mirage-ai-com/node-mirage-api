@@ -54,6 +54,7 @@ export interface MirageOptions {
 
 export interface RequestOptionsBase {
   trace?: string;
+  signal?: AbortSignal;
 }
 
 export interface RequestOptions extends RequestOptionsBase {
@@ -77,6 +78,11 @@ interface MirageNetwork {
 interface MirageAgents {
   data: http.Agent;
   stream: http.Agent;
+}
+
+interface MirageStreamEmitter extends events.EventEmitter {
+  // eslint-disable-next-line no-unused-vars
+  abort(reason?: string): void;
 }
 
 /**************************************************************************
@@ -229,12 +235,45 @@ class Mirage {
       this.getRESTURL(resource, true), data,
         this.getRequestOptions(options.trace, true)
     );
+    let isRequestAborted = false;
+
+    let fnAbortRequest = (reason: string = "Aborted") => {
+      if (isRequestAborted === true) {
+        return;
+      }
+
+      isRequestAborted = true;
+
+      // @ts-ignore
+      request.abort(reason);
+    };
+
+    if (options.signal) {
+      if (options.signal.aborted === true) {
+        fnAbortRequest();
+      } else {
+        options.signal.addEventListener("abort", () => {
+          fnAbortRequest();
+        }, { once: true });
+      }
+    }
 
     request
       .on("response", (response) => {
-        let emitter   = new events.EventEmitter(),
+        let emitter   = new events.EventEmitter() as MirageStreamEmitter,
           drainBuffer = "",
           eventBlock  = "";
+        let isEnded = false;
+
+        let fnEmitEndOnce = () => {
+          if (isEnded === true) {
+            return;
+          }
+
+          isEnded = true;
+
+          emitter.emit("end");
+        };
 
         // Response is not successful?
         if (response.statusCode >= 400) {
@@ -260,6 +299,30 @@ class Mirage {
           }
         };
 
+        emitter.abort = (reason: string = "Aborted") => {
+          // Clear previous stall timeout (as needed)
+          fnCancelNextChunkStall();
+
+          // Clear buffer (we aborted)
+          drainBuffer = "";
+
+          fnAbortRequest(reason);
+
+          setImmediate(() => {
+            fnEmitEndOnce();
+          });
+        };
+
+        if (options.signal) {
+          if (options.signal.aborted === true) {
+            emitter.abort();
+          } else {
+            options.signal.addEventListener("abort", () => {
+              emitter.abort();
+            }, { once: true });
+          }
+        }
+
         let fnScheduleNextChunkStall = () => {
           // Clear previous stall timeout (as needed)
           fnCancelNextChunkStall();
@@ -267,8 +330,7 @@ class Mirage {
           // Schedule next stall timeout
           nextChunkStallTimeout = setTimeout(() => {
             // Abort request straight away
-            // @ts-ignore
-            request.abort("Stalled");
+            fnAbortRequest("Stalled");
 
             // Clear buffer (we aborted)
             drainBuffer = "";
@@ -279,7 +341,7 @@ class Mirage {
             // Process at next event loop tick, as the 'error' event might \
             //   come out-of-order after the 'end' event.
             setImmediate(() => {
-              emitter.emit("end");
+              fnEmitEndOnce();
             });
           }, STREAM_CHUNK_STALL_TIMEOUT);
         };
@@ -289,6 +351,10 @@ class Mirage {
 
         // Handle data chunks
         response.on("data", (chunk) => {
+          if (isRequestAborted === true) {
+            return;
+          }
+
           // Schedule next chunk stall timeout
           fnScheduleNextChunkStall();
 
@@ -381,6 +447,10 @@ class Mirage {
 
         // Handle other stream events
         response.on("error", (error) => {
+          if (isRequestAborted === true) {
+            return;
+          }
+
           // Clear previous stall timeout (as needed)
           fnCancelNextChunkStall();
 
@@ -402,7 +472,7 @@ class Mirage {
             drainBuffer = "";
 
             // Raise 'end' event
-            emitter.emit("end");
+            fnEmitEndOnce();
           });
         });
 
