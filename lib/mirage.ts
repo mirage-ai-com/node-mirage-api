@@ -55,6 +55,7 @@ export interface MirageOptions {
 export interface RequestOptionsBase {
   trace?: string;
   signal?: AbortSignal;
+  timeout?: number;
 }
 
 export interface RequestOptions extends RequestOptionsBase {
@@ -189,9 +190,34 @@ class Mirage {
     // eslint-disable-next-line no-unused-vars
     reject: (error: object) => void
   ) {
-    restler.postJson(
-      this.getRESTURL(resource), data, this.getRequestOptions(options.trace)
-    )
+    let request = restler.postJson(
+      this.getRESTURL(resource), data,
+      this.getRequestOptions(options.trace, false, options.timeout)
+    );
+    let isRequestAborted = false;
+
+    let fnAbortRequest = (reason: string = "Aborted") => {
+      if (isRequestAborted === true) {
+        return;
+      }
+
+      isRequestAborted = true;
+
+      // @ts-ignore
+      request.abort(reason);
+    };
+
+    if (options.signal) {
+      if (options.signal.aborted === true) {
+        fnAbortRequest();
+      } else {
+        options.signal.addEventListener("abort", () => {
+          fnAbortRequest();
+        }, { once: true });
+      }
+    }
+
+    request
       .on("success", (data) => {
         if (data?.data) {
           return resolve(data.data);
@@ -233,7 +259,7 @@ class Mirage {
   ) {
     let request = restler.postJson(
       this.getRESTURL(resource, true), data,
-        this.getRequestOptions(options.trace, true)
+      this.getRequestOptions(options.trace, true, options.timeout)
     );
     let isRequestAborted = false;
 
@@ -511,7 +537,11 @@ class Mirage {
   /**
   * Get request options
   */
-  private getRequestOptions(trace: string = null, stream: boolean = false) {
+  private getRequestOptions(
+    trace: string = null,
+    stream: boolean = false,
+    timeout: number = null
+  ) {
     trace  = (trace  || null);
     stream = (stream || false);
 
@@ -536,7 +566,7 @@ class Mirage {
     return {
       username: this.auth.username,
       password: this.auth.password,
-      timeout: this.network.timeout,
+      timeout: (timeout || this.network.timeout),
 
       headers: headers,
 
