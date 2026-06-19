@@ -120,12 +120,19 @@ export interface AnswerChatRequestToolFunction {
   parameters?: object;
 }
 
+export interface AnswerUsage {
+  input_tokens: number;
+  output_tokens: number;
+  total_tokens: number;
+}
+
 export interface AnswerPromptResponse {
   answer: string;
   model: string;
   thinking?: string;
   sources?: AnswerPromptResponseSource[];
   logprobs?: AnswerPromptResponseLogprob[];
+  usage?: AnswerUsage;
 }
 
 export interface AnswerPromptResponseSource {
@@ -155,6 +162,7 @@ export interface AnswerQuestionResponse {
   model: string;
   thinking?: string;
   sources: AnswerQuestionResponseSource[];
+  usage?: AnswerUsage;
 }
 
 export interface AnswerQuestionResponseSource {
@@ -173,6 +181,7 @@ export interface AnswerChatResponse {
   thinking?: string;
   tool_calls?: AnswerChatResponseToolCall[];
   logprobs?: AnswerChatResponseLogprob[];
+  usage?: AnswerUsage;
 }
 
 export interface AnswerChatResponseLogprob {
@@ -203,6 +212,8 @@ export interface AnswerChatResponseStreamable {
   on(event: "tool_calls", callback: (data: AnswerChatResponseToolCall[]) => void): void;
   // eslint-disable-next-line no-unused-vars
   on(event: "logprobs", callback: (data: AnswerChatResponseLogprob) => void): void;
+  // eslint-disable-next-line no-unused-vars
+  on(event: "usage", callback: (data: AnswerUsage) => void): void;
   // eslint-disable-next-line no-unused-vars
   on(event: "data", callback: (data: unknown) => void): void;
   // eslint-disable-next-line no-unused-vars

@@ -6,7 +6,7 @@ The Mirage API NodeJS wrapper. Access AI inference services.
 
 Copyright 2023 Crisp IM SAS. See LICENSE for copying information.
 
-* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 07/04/2026
+* **📝 Implements**: [API Reference (V1)](https://docs.mirage-ai.com/references/api/v1/) at revision: 19/06/2026
 * **😘 Maintainer**: [@valeriansaliou](https://github.com/valeriansaliou)
 
 ## Usage
@@ -149,7 +149,13 @@ client.Task.AnswerPrompt({
   "reason": "processed",
 
   "data": {
-    "answer": "The alpaca (Lama pacos) is a species of South American camelid mammal. It is similar to, and often confused with, the llama. However, alpacas are often noticeably smaller than llamas. The two animals are closely related and can successfully crossbreed. Both species are believed to have been domesticated from their wild relatives, the vicuña and guanaco. There are two breeds of alpaca: the Suri alpaca and the Huacaya alpaca."
+    "answer": "The alpaca (Lama pacos) is a species of South American camelid mammal. It is similar to, and often confused with, the llama. However, alpacas are often noticeably smaller than llamas. The two animals are closely related and can successfully crossbreed. Both species are believed to have been domesticated from their wild relatives, the vicuña and guanaco. There are two breeds of alpaca: the Suri alpaca and the Huacaya alpaca.",
+
+    "usage": {
+      "input_tokens": 18,
+      "output_tokens": 92,
+      "total_tokens": 110
+    }
   }
 }
 ```
@@ -208,7 +214,13 @@ client.Task.AnswerQuestion(
 
   "data": {
     "answer": "You can add the Crisp chatbox to your website by following this guide: https://help.crisp.chat/en/article/how-to-add-crisp-chatbox-to-your-website-dkrg1d/ :)",
-    "sources": []
+    "sources": [],
+
+    "usage": {
+      "input_tokens": 412,
+      "output_tokens": 58,
+      "total_tokens": 470
+    }
   }
 }
 ```
@@ -236,6 +248,9 @@ event: answer
 
 event: answer
 {"index": 4, "chunk": ""}
+
+event: usage
+{"input_tokens": 412, "output_tokens": 58, "total_tokens": 470}
 
 event: system
 data: [DONE]
@@ -311,7 +326,13 @@ client.Task.AnswerChat(
 
   "data": {
     "answer": "Sure! What is your email and order number?",
-    "model": "medium"
+    "model": "medium",
+
+    "usage": {
+      "input_tokens": 64,
+      "output_tokens": 11,
+      "total_tokens": 75
+    }
   }
 }
 ```
