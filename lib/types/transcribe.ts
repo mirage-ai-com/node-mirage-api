@@ -33,3 +33,22 @@ export interface TranscribeSpeechResponsePart {
   end: number;
   text: string;
 }
+
+export interface TranscribeSpeechResponseStreamable {
+  // eslint-disable-next-line no-unused-vars
+  abort(reason?: string): void;
+  // eslint-disable-next-line no-unused-vars
+  on(event: "locale", callback: (data: string) => void): void;
+  // eslint-disable-next-line no-unused-vars
+  on(event: "part", callback: (data: TranscribeSpeechResponsePart) => void): void;
+  // eslint-disable-next-line no-unused-vars
+  on(event: "data", callback: (data: unknown) => void): void;
+  // eslint-disable-next-line no-unused-vars
+  on(event: "start", callback: () => void): void;
+  // eslint-disable-next-line no-unused-vars
+  on(event: "done", callback: () => void): void;
+  // eslint-disable-next-line no-unused-vars
+  on(event: "end", callback: () => unknown): void;
+  // eslint-disable-next-line no-unused-vars
+  on(event: "error", callback: (data: unknown) => void): void;
+}

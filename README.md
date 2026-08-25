@@ -72,7 +72,7 @@ This library implements all methods the Mirage API provides. See the [API docs](
 * **Method:** `client.Task.TranscribeSpeech(data, { trace?, stream? })`
 * **Reference:** [Transcribe Speech](https://docs.mirage-ai.com/references/api/v1/#transcribe-speech)
 
-* **Request:**
+* **Request (data):**
 
 ```javascript
 client.Task.TranscribeSpeech(
@@ -91,6 +91,56 @@ client.Task.TranscribeSpeech(
     stream : false
   }
 );
+```
+
+* **Request (stream):**
+
+```javascript
+var parts = [];
+var locale = "";
+
+client.Task.TranscribeSpeech(
+  {
+    "locale": {
+      "to": "en"
+    },
+
+    "media": {
+      "type": "audio/webm",
+      "url": "https://files.mirage-ai.com/dash/terminal/samples/transcribe-speech/hey-there.weba"
+    }
+  },
+
+  {
+    stream : true
+  }
+)
+  .then(function(stream) {
+    stream.on("locale", function(data) {
+      locale = data;
+    });
+
+    stream.on("part", function(data) {
+      parts.push(data);
+    });
+
+    // Stall or disconnect: keep parts already received
+    stream.on("error", function(error) {
+      console.warn("Stream interrupted, using truncated transcript:", error);
+      console.info("Truncated audio:", { locale : locale, parts : parts });
+    });
+
+    stream.on("done", function() {
+      console.info("Transcribed audio:", { locale : locale, parts : parts });
+    });
+
+    stream.on("end", function() {
+      console.info("End of transcribe stream.");
+    });
+  })
+  .catch(function(error) {
+    console.error("Failed creating transcribe speech stream:", error);
+  });
 ```
 
 * **Response (data):**

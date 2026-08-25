@@ -18,7 +18,8 @@ import BaseResource from "./base-resource";
 // PROJECT: TYPES
 import {
   TranscribeSpeechRequest,
-  TranscribeSpeechResponse
+  TranscribeSpeechResponse,
+  TranscribeSpeechResponseStreamable
 } from "@/types/transcribe";
 
 import {
@@ -88,7 +89,7 @@ export default class Task extends BaseResource {
    */
   public TranscribeSpeech(
     data: TranscribeSpeechRequest, options?: RequestOptions
-  ): Promise<TranscribeSpeechResponse> {
+  ): Promise<TranscribeSpeechResponse|TranscribeSpeechResponseStreamable> {
     return this.parent.post("/task/transcribe/speech", data, options);
   }
 
