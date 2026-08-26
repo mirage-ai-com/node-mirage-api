@@ -50,6 +50,7 @@ export interface MirageOptions {
   rest_host?: string;
   rest_base?: string;
   timeout?: number;
+  stream_chunk_stall_timeout?: number;
 }
 
 export interface RequestOptionsBase {
@@ -74,6 +75,7 @@ interface MirageRest {
 
 interface MirageNetwork {
   timeout: number;
+  streamChunkStallTimeout: number;
 }
 
 interface MirageAgents {
@@ -121,6 +123,16 @@ class Mirage {
       throw new Error("Invalid or missing secretKey");
     }
 
+    if (
+      options.stream_chunk_stall_timeout !== undefined &&
+      (
+        Number.isFinite(options.stream_chunk_stall_timeout) === false ||
+        options.stream_chunk_stall_timeout <= 0
+      )
+    ) {
+      throw new Error("Invalid stream_chunk_stall_timeout");
+    }
+
     // Prepare storage
     this.auth = {
       username: userID,
@@ -133,7 +145,10 @@ class Mirage {
     };
 
     this.network = {
-      timeout: (options.timeout || DEFAULT_TIMEOUT)
+      timeout: (options.timeout || DEFAULT_TIMEOUT),
+      streamChunkStallTimeout: (
+        options.stream_chunk_stall_timeout ?? STREAM_CHUNK_STALL_TIMEOUT
+      )
     };
 
     // Initialize HTTP agents
@@ -369,7 +384,7 @@ class Mirage {
             setImmediate(() => {
               fnEmitEndOnce();
             });
-          }, STREAM_CHUNK_STALL_TIMEOUT);
+          }, this.network.streamChunkStallTimeout);
         };
 
         // Schedule first chunk stall timeout
