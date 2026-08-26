@@ -91,9 +91,28 @@ export interface AnswerChatRequestContextConversation {
 
 export interface AnswerChatRequestContextConversationMessage {
   from: string;
-  text: string;
+  text?: string;
+  content?: AnswerChatRequestContextConversationMessageContent[];
   tool_calls?: AnswerChatResponseToolCall[];
   tool_call_id?: string;
+}
+
+export type AnswerChatRequestContextConversationMessageContent =
+  AnswerChatRequestContextConversationMessageTextContent |
+  AnswerChatRequestContextConversationMessageImageContent;
+
+export interface AnswerChatRequestContextConversationMessageTextContent {
+  type: "text";
+  text: string;
+}
+
+export interface AnswerChatRequestContextConversationMessageImageContent {
+  type: "image_url";
+  image_url: AnswerChatRequestContextConversationMessageImageUrl;
+}
+
+export interface AnswerChatRequestContextConversationMessageImageUrl {
+  url: string;
 }
 
 export interface AnswerChatRequestTool {

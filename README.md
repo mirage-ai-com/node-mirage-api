@@ -321,7 +321,18 @@ client.Task.AnswerChat(
         "messages": [
           {
             "from": "user",
-            "text": "Where is my order?"
+            "content": [
+              {
+                "type": "image_url",
+                "image_url": {
+                  "url": "https://storage.crisp.chat/users/upload/order.png"
+                }
+              },
+              {
+                "type": "text",
+                "text": "Where is the order shown in this image?"
+              }
+            ]
           }
         ]
       }
